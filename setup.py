@@ -37,7 +37,7 @@ setup(
     install_requires=[
         'Django>=3,<5.1',
         'django-contrib-comments>=2.2,<2.3',
-        'djangorestframework>=3.12,<3.15',
+        'djangorestframework>=3.12',
         'docutils',
         'six',
         'pytz',
