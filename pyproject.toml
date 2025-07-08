@@ -21,10 +21,8 @@ classifiers = [
 dependencies = [
     "Django >=4, <6",
     'django-contrib-comments >=2.2, <2.3',
-    'djangorestframework >=3.12, <3.16',
     'docutils',
     'pytz',
-    'six',
 ]
 description = "Commenting Django app with threads, follow up notifications and email confirmation."
 dynamic = ["version"]
@@ -47,13 +45,7 @@ dev = [
     "ruff >=0.11.0, <1",
     "tox >=4.25, <4.26",
 ]
-docs = [
-    "sphinx >=8, <9",
-    "myst-parser >=4.0.0, <4.1",
-    "sphinx-colorschemed-images >=0.2.2",
-    "sphinx-copybutton >=0.5.2, <1.0.0",
-    "sphinx-nefertiti >=0.7.5",
-]
+
 
 [tool.coverage.run]
 plugins = ["django_coverage_plugin"]
@@ -105,6 +97,10 @@ extend-select = [
     "UP",  # pyupgrade
     "T20", # flake8-print
 ]
+
+#[tool.pytest.ini_options]
+#DJANGO_SETTINGS_MODULE = "django_comments_xtd.tests.settings"
+#python_files = ["test_*.py"]
 
 [tool.pytest]
 addopts = "--create-db"

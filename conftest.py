@@ -13,7 +13,7 @@ def pytest_configure(config):
         sys.path.insert(0, f"{Path.cwd()}")
     except Exception:
         pass
-    os.environ["DJANGO_SETTINGS_MODULE"] = "tests.settings"
+    os.environ["DJANGO_SETTINGS_MODULE"] = "django_comments_xtd.tests.settings"
 
     import django
 

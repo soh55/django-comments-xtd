@@ -26,8 +26,6 @@ urlpatterns = [
         name="comments-xtd-list",
     ),
     path("comments/", include("django_comments_xtd.urls")),
-    path(
-        "api-auth/", include("rest_framework.urls", namespace="rest_framework")
-    ),
+
 ]
 urlpatterns += staticfiles_urlpatterns()

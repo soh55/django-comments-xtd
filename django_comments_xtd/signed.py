@@ -42,7 +42,6 @@ import hashlib
 import hmac
 import pickle
 
-import six
 
 from django_comments_xtd.conf import settings
 
@@ -78,7 +77,7 @@ def dumps(obj, key=None, compress=False, extra_key=b""):
 
 def loads(s, key=None, extra_key=b""):
     """Reverse of dumps(), raises ValueError if signature fails"""
-    if isinstance(s, six.text_type):
+    if isinstance(s, str):
         s = s.encode("utf8")  # base64 works on bytestrings
     try:
         base64d = unsign(
@@ -115,7 +114,7 @@ class BadSignature(ValueError):
 
 
 def sign(value, key=None):
-    if isinstance(value, six.text_type):
+    if isinstance(value, str):
         raise TypeError(f"sign() needs bytestring: {value!r}")
     if key is None:
         key = settings.SECRET_KEY.encode("ascii")
@@ -123,7 +122,7 @@ def sign(value, key=None):
 
 
 def unsign(signed_value, key=None):
-    if isinstance(signed_value, six.text_type):
+    if isinstance(signed_value, str):
         raise TypeError("unsign() needs bytestring")
     if key is None:
         key = settings.SECRET_KEY.encode("ascii")

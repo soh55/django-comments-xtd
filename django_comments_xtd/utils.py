@@ -2,17 +2,10 @@
 # http://ui.co.id/blog/asynchronous-send_mail-in-django
 
 import hashlib
-
-try:
-    import Queue as queue  # python2  # noqa: N813
-except ImportError:
-    import queue as queue  # python3  # noqa: PLC0414
+import queue
 import threading
+from urllib.parse import urlencode
 
-try:
-    from urllib.parse import urlencode
-except ImportError:
-    from urllib import urlencode
 
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.shortcuts import get_current_site

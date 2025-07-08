@@ -1,4 +1,3 @@
-import six
 from django.apps import apps
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required
@@ -288,7 +287,7 @@ def notify_comment_followers(comment):
         "django_comments_xtd/email_followup_comment.html"
     )
 
-    for email, (name, key) in six.iteritems(followers):
+    for email, (name, key) in followers.items():
         mute_url = reverse("comments-xtd-mute", args=[key.decode("utf-8")])
         message_context = {
             "user_name": name,

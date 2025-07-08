@@ -1,5 +1,4 @@
 from django.urls import include, path, re_path
-from rest_framework.urlpatterns import format_suffix_patterns
 
 from django_comments_xtd import views
 
@@ -19,14 +18,8 @@ urlpatterns = [
     re_path(
         r"^disliked/$", views.dislike_done, name="comments-xtd-dislike-done"
     ),
-    # API handlers.
-    path(
-        "api/",
-        include("django_comments_xtd.api.urls"),
-        {"override_drf_defaults": True},
-    ),
+
     path("", include("django_comments.urls")),
 ]
 
 
-urlpatterns = format_suffix_patterns(urlpatterns)

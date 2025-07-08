@@ -1,11 +1,7 @@
-import hashlib
-import json
 import re
+import hashlib
 
-try:
-    from urllib.parse import urlencode
-except ImportError:
-    from urllib import urlencode
+from urllib.parse import urlencode
 
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Prefetch
@@ -15,7 +11,6 @@ from django.utils.safestring import mark_safe
 from django_comments.models import CommentFlag
 
 from django_comments_xtd import get_model as get_comment_model
-from django_comments_xtd.api import frontend
 from django_comments_xtd.models import DISLIKEDIT_FLAG, LIKEDIT_FLAG
 from django_comments_xtd.utils import (
     get_app_model_options,
@@ -534,39 +529,6 @@ def get_xtdcomment_tree(parser, token):
     obj, var_name = match.groups()
     with_feedback = bool(args.strip().endswith("with_feedback"))
     return GetXtdCommentTreeNode(obj, var_name, with_feedback)
-
-
-# ----------------------------------------------------------------------
-class GetCommentBoxPropsNode(Node):
-    def __init__(self, obj):
-        self.obj = Variable(obj)
-
-    def render(self, context):
-        obj = self.obj.resolve(context)
-        user = context.get("user", None)
-        request = context.get("request", None)
-        props = frontend.commentbox_props(obj, user, request=request)
-        return json.dumps(props)
-
-
-@register.tag
-def get_commentbox_props(parser, token):
-    """
-    Returns a JSON object with the initial props for the CommentBox component.
-
-    See api.frontend.commentbox_props for full details on the props.
-    """
-    try:
-        tag_name, args = token.contents.split(None, 1)
-    except ValueError as exc:
-        raise TemplateSyntaxError(
-            f"{token.contents.split()[0]} tag requires arguments"
-        ) from exc
-    match = re.search(r"for (\w+)", args)
-    if not match:
-        raise TemplateSyntaxError(f"{tag_name} tag had invalid arguments")
-    obj = match.groups()[0]
-    return GetCommentBoxPropsNode(obj)
 
 
 # ----------------------------------------------------------------------

@@ -95,7 +95,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.staticfiles",
-    "rest_framework",
     "django_comments_xtd",
     "django_comments_xtd.tests",
     "django_comments",
@@ -119,11 +118,5 @@ COMMENTS_XTD_APP_MODEL_OPTIONS = {
 
 MY_DRF_AUTH_TOKEN = "08d9fd42468aebbb8087b604b526ff0821ce4525"
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-        "django_comments_xtd.tests.apiauth.APIRequestAuthentication",
-    ]
-}
 
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
