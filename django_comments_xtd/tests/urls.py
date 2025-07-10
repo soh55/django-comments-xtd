@@ -27,5 +27,12 @@ urlpatterns = [
     ),
     path("comments/", include("django_comments_xtd.urls")),
 
+    re_path(
+        r"^quotes/(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/"
+        r"(?P<slug>[-\w]+)/$",
+        views.dummy_view,
+        name="quote-detail",
+    ),
+
 ]
 urlpatterns += staticfiles_urlpatterns()
